@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>E-RAMP OTBAN X</title>
+  <style>
+    :root{--navy:#0b2f6b;--blue:#1559c9;--light:#eef4fb;--line:#d9e2ef;--text:#172033;--ok:#16834a;--bad:#c62828}
+    *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:var(--text)}
+    header{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:18px 22px;position:sticky;top:0;z-index:3;box-shadow:0 3px 12px #0002}
+    header h1{margin:0;font-size:22px}header small{opacity:.85}.wrap{max-width:1120px;margin:auto;padding:22px}.grid{display:grid;grid-template-columns:250px 1fr;gap:18px}
+    nav,.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 6px 22px #1c35571a}.card{padding:20px}nav{padding:12px;height:max-content;position:sticky;top:92px}
+    nav button,.btn{width:100%;border:0;border-radius:10px;padding:12px 14px;margin:5px 0;font-weight:700;cursor:pointer}.navbtn{background:#fff;text-align:left;color:var(--text)}.navbtn.active,.btn.primary{background:var(--blue);color:#fff}.btn.secondary{background:#e8eef8;color:var(--navy)}
+    h2{margin-top:0}.hero{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;align-items:center}.heroBox{background:linear-gradient(135deg,#eaf2ff,#fff);border:1px solid var(--line);padding:22px;border-radius:16px}.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}.stat b{display:block;font-size:26px;color:var(--blue)}
+    label{font-size:13px;font-weight:700;display:block;margin-bottom:6px}.field{margin-bottom:14px}input,select,textarea{width:100%;padding:10px;border:1px solid #bfcade;border-radius:9px;background:#fff}.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.section{margin-top:18px;border:1px solid var(--line);border-radius:14px;overflow:hidden}.section h3{margin:0;padding:12px 14px;background:var(--light)}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-top:1px solid var(--line);text-align:left;font-size:14px}th{background:#fafcff}.status{font-weight:700}.ok{color:var(--ok)}.bad{color:var(--bad)}
+    .hide{display:none}.notice{padding:12px 14px;border-radius:10px;background:#fff8dc;border:1px solid #ecd77e;margin-bottom:16px}.footer{font-size:12px;color:#68758a;margin-top:18px;text-align:center}
+    @media(max-width:800px){.grid{grid-template-columns:1fr}nav{position:static;display:grid;grid-template-columns:repeat(2,1fr)}.hero,.formgrid{grid-template-columns:1fr}.statgrid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<header><h1>E-RAMP OTBAN X</h1><small>Digital Ramp Inspection Checklist • Kantor Otoritas Bandar Udara Wilayah X Merauke</small></header>
+<div class="wrap"><div class="grid">
+<nav>
+  <button class="navbtn active" data-page="home">Beranda</button>
+  <button class="navbtn" data-page="inspect">Mulai Pemeriksaan</button>
+  <button class="navbtn" data-page="history">Riwayat</button>
+  <button class="navbtn" data-page="findings">Data Temuan</button>
+  <button class="navbtn" data-page="login">Login</button>
+</nav>
+<main>
+<section id="home" class="page card">
+  <div class="hero"><div class="heroBox"><h2>Sistem Ramp Inspection Digital</h2><p>Mencatat identitas penerbangan, hasil checklist, temuan, tindakan koreksi, dan dokumentasi foto dalam satu alur.</p><button class="btn primary" onclick="go('inspect')">Mulai Pemeriksaan</button></div><div class="statgrid"><div class="stat"><b id="sTotal">0</b>Total inspeksi</div><div class="stat"><b id="sFinding">0</b>Temuan</div><div class="stat"><b id="sDone">0</b>Selesai</div></div></div>
+  <div class="notice"><b>Status:</b> Website publik sudah aktif. Saat ini berjalan dalam mode demo lokal. Login resmi, database daring, dan unggah foto lintas perangkat akan aktif setelah konfigurasi Supabase dimasukkan.</div>
+</section>
+<section id="inspect" class="page card hide">
+<h2>Form Pemeriksaan Baru</h2>
+<div class="formgrid">
+  <div class="field"><label>Tanggal</label><input id="date" type="date"></div><div class="field"><label>Waktu</label><input id="time" type="time"></div><div class="field"><label>Tempat</label><input id="place" value="Bandar Udara Mopah Merauke"></div>
+  <div class="field"><label>Operator</label><input id="operator" placeholder="Lion Air"></div><div class="field"><label>Nomor AOC</label><input id="aoc" placeholder="010"></div><div class="field"><label>Registrasi Pesawat</label><input id="reg" placeholder="PK-LQZ"></div>
+  <div class="field"><label>Tipe Pesawat</label><input id="type" placeholder="B737-800"></div><div class="field"><label>Nomor Penerbangan</label><input id="flight" placeholder="JT 798"></div><div class="field"><label>Rute</label><input id="route" placeholder="DJJ–MKQ"></div>
+</div>
+<div id="checklists"></div>
+<div class="section"><h3>Temuan dan Dokumentasi</h3><div style="padding:14px"><div class="field"><label>Uraian temuan</label><textarea id="finding" rows="3"></textarea></div><div class="formgrid"><div class="field"><label>Kategori</label><select id="category"><option value="">Tidak ada</option><option>Cat 1</option><option>Cat 2</option><option>Cat 3</option></select></div><div class="field"><label>Action Taken</label><select id="action"><option>No remarks</option><option>Information to PIC</option><option>Information to operator and authority</option><option>Restrictions on aircraft</option><option>Corrective actions before flight</option><option>Aircraft grounded</option></select></div><div class="field"><label>Foto bukti</label><input type="file" accept="image/*" id="photo"></div></div></div></div>
+<button class="btn primary" onclick="saveInspection()">Simpan Pemeriksaan</button>
+</section>
+<section id="history" class="page card hide"><h2>Riwayat Pemeriksaan</h2><div id="historyTable"></div></section>
+<section id="findings" class="page card hide"><h2>Data Temuan</h2><div id="findingTable"></div></section>
+<section id="login" class="page card hide"><h2>Login Petugas</h2><div class="notice">Mode autentikasi resmi belum diaktifkan. Setelah Supabase dikonfigurasi, halaman ini akan menggunakan email/password atau Google Sign-In.</div><div style="max-width:420px"><div class="field"><label>Email</label><input type="email" placeholder="nama@kemenhub.go.id"></div><div class="field"><label>Password</label><input type="password"></div><button class="btn primary" onclick="alert('Konfigurasi Supabase belum diisi.')">Login</button><button class="btn secondary" onclick="alert('Google OAuth akan aktif setelah Supabase dikonfigurasi.')">Login dengan Google</button></div></section>
+</main></div><div class="footer">Prototype aktualisasi Latsar • bukan pengganti formulir resmi sebelum mendapat persetujuan unit berwenang</div></div>
+<script>
+const groups={
+'A. FLIGHT DECK':['General condition','Emergency exit','Equipment documentation','Manuals','Checklists','Navigation/instrument charts','Minimum Equipment List','Certificate of Registration','Noise Certificate','AOC or equivalent','Radio License','Certificate of Airworthiness','Flight preparation','Weight and Balance sheet','Hand fire extinguishers','Life jackets/flotation devices','Safety harness','Oxygen equipment','Flash light and crash axe','Flight crew license and required equipment','Journey log book or equivalent','Maintenance release','Defect notification and rectification','Pre-flight inspection','ETOPS/EDTO requirements'],
+'B. SAFETY/CABIN':['General internal condition and placard','Cabin attendant station and crew rest area','First aid kit/emergency medical kit','Fire extinguisher and PBE','Life jackets/flotation devices','Seat belt and seat condition','Emergency exit, lighting, marking, flash light and megaphone','Slides/Life-Rafts and ELT','Oxygen supply','Safety instruction','Cabin crew members','Access to emergency exits','Stowage of passenger baggage','Seat capacity','Security of flight crew compartment door'],
+'C. AIRCRAFT CONDITION':['General external condition','Doors and hatches','Wings, flight controls and tail','Wheels, brakes and tires','Undercarriage/skids/floats','Wheel well','Intake and exhaust nozzle','Fan blades','Propellers or rotors','Obvious repairs','Obvious unrepaired damage','Leakage'],
+'D. CARGO':['General condition of cargo compartment and containers','Dangerous Goods','Safety of cargo on board'],
+'E. GENERAL':['Additional Remark','Refueling','Language for Communication']};
+function build(){const root=document.getElementById('checklists');root.innerHTML='';Object.entries(groups).forEach(([g,items])=>{const box=document.createElement('div');box.className='section';box.innerHTML=`<h3>${g}</h3><table><thead><tr><th style="width:50%">Item</th><th>Hasil</th><th>Catatan</th></tr></thead><tbody>${items.map((x,i)=>`<tr><td>${i+1}. ${x}</td><td><select class="result"><option>Sesuai</option><option>Tidak Sesuai</option><option>N/A</option><option>Tidak Diperiksa</option></select></td><td><input class="remark" placeholder="Opsional"></td></tr>`).join('')}</tbody></table>`;root.appendChild(box)})}
+function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.add('hide'));document.getElementById(id).classList.remove('hide');document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===id));if(id==='history'||id==='findings'||id==='home')render()}
+document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>go(b.dataset.page));
+function saveInspection(){const rows=[...document.querySelectorAll('.result')];const failed=rows.filter(x=>x.value==='Tidak Sesuai').length;const data={id:Date.now(),date:date.value,time:time.value,place:place.value,operator:operator.value,aoc:aoc.value,reg:reg.value.toUpperCase(),type:type.value,flight:flight.value,route:route.value,failed,finding:finding.value,category:category.value,action:action.value,status:'Selesai'};if(!data.date||!data.operator||!data.reg){alert('Isi minimal tanggal, operator, dan registrasi pesawat.');return}const arr=JSON.parse(localStorage.getItem('eramp')||'[]');arr.unshift(data);localStorage.setItem('eramp',JSON.stringify(arr));alert('Pemeriksaan tersimpan pada browser ini.');go('history')}
+function render(){const arr=JSON.parse(localStorage.getItem('eramp')||'[]');sTotal.textContent=arr.length;sFinding.textContent=arr.reduce((a,b)=>a+(b.failed||0),0);sDone.textContent=arr.filter(x=>x.status==='Selesai').length;historyTable.innerHTML=arr.length?`<table><tr><th>Tanggal</th><th>Operator</th><th>Registrasi</th><th>Flight</th><th>Temuan</th><th>Status</th></tr>${arr.map(x=>`<tr><td>${x.date}</td><td>${x.operator}</td><td>${x.reg}</td><td>${x.flight||'-'}</td><td class="${x.failed?'bad':'ok'}">${x.failed}</td><td class="status ok">${x.status}</td></tr>`).join('')}</table>`:'<p>Belum ada data pemeriksaan.</p>';const f=arr.filter(x=>x.failed||x.finding);findingTable.innerHTML=f.length?`<table><tr><th>Tanggal</th><th>Pesawat</th><th>Kategori</th><th>Temuan</th><th>Tindakan</th></tr>${f.map(x=>`<tr><td>${x.date}</td><td>${x.operator} / ${x.reg}</td><td>${x.category||'-'}</td><td>${x.finding||x.failed+' item tidak sesuai'}</td><td>${x.action}</td></tr>`).join('')}</table>`:'<p>Belum ada temuan.</p>'}
+const now=new Date();date.value=now.toISOString().slice(0,10);time.value=now.toTimeString().slice(0,5);build();render();
+</script>
+</body></html>
