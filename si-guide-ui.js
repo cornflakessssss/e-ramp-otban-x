@@ -35,7 +35,7 @@ function severityHtml(severity={}) {
   const items = order.filter(([key]) => severity[key]).map(([key,cls]) =>
     `<li class="${cls}"><b>${key}</b> ${esc(severity[key])}</li>`
   ).join('');
-  return items ? `<ul class="si-severity">${items}</ul>` : '<span>Tidak dirinci pada ringkasan ini.</span>';
+  return items ? `<ul class="si-severity">${items}</ul>` : '<span>No severity example is included in this learning summary.</span>';
 }
 
 function installGuidance() {
@@ -48,7 +48,7 @@ function installGuidance() {
 
   const note = document.createElement('div');
   note.className = 'si-learning-note';
-  note.innerHTML = `<strong>Panduan pembelajaran SI 8900-6.2:</strong> tekan “Lihat panduan SI” pada setiap item untuk melihat cara pengecekan, referensi, serta contoh tingkat keseriusan. Ringkasan ini membantu pembelajaran dan tidak menggantikan SI, CASR, ICAO Annex, manual pabrikan, atau pencatatan resmi pada IMSIS.`;
+  note.innerHTML = `<strong>SI 8900-6.2 learning guidance:</strong> select “View SI guidance” under an item to see the inspection method, principal references and examples of seriousness. This learning summary does not replace the complete SI, CASR, ICAO Annexes, approved manufacturer data or official reporting in IMSIS.`;
   root.parentNode.insertBefore(note, root);
 
   rows.forEach(row => {
@@ -63,7 +63,7 @@ function installGuidance() {
     button.type = 'button';
     button.className = 'si-guide-btn';
     button.setAttribute('aria-expanded','false');
-    button.innerHTML = '📘 Lihat panduan SI';
+    button.innerHTML = '📘 View SI guidance';
     itemCell.appendChild(document.createElement('br'));
     itemCell.appendChild(button);
 
@@ -80,29 +80,25 @@ function installGuidance() {
           <span class="si-source-badge">SI 8900-6.2 • Appendix 2</span>
         </div>
         <div class="si-guide-grid">
-          <div class="si-guide-block"><b>Cara pengecekan</b>${esc(item.instruction)}</div>
-          <div class="si-guide-block"><b>Referensi utama</b>${esc(item.reference)}</div>
-          <div class="si-guide-block" style="grid-column:1/-1"><b>Contoh tingkat keseriusan</b>${severityHtml(item.severity)}</div>
+          <div class="si-guide-block"><b>Inspection method</b>${esc(item.instruction)}</div>
+          <div class="si-guide-block"><b>Principal reference</b>${esc(item.reference)}</div>
+          <div class="si-guide-block" style="grid-column:1/-1"><b>Examples of seriousness</b>${severityHtml(item.severity)}</div>
         </div>
-        <div class="si-disclaimer">Gunakan regulasi dan referensi yang berlaku, approved data, MEL/CDL/AMM/SRM, serta pertimbangan inspektur yang berwenang. Data resmi hasil ramp inspection tetap disimpan dan dilaporkan melalui mekanisme instansi/IMSIS.</div>
+        <div class="si-disclaimer">Use the currently applicable regulations, approved data, MEL/CDL/AMM/SRM and the judgement of an authorised inspector. Official ramp-inspection records remain subject to the organisation's procedures and IMSIS.</div>
       </div>`;
     detailRow.appendChild(detailCell);
     row.insertAdjacentElement('afterend', detailRow);
 
-    const toggle = (open) => {
+    const toggle = open => {
       const shouldOpen = open ?? !detailRow.classList.contains('open');
       detailRow.classList.toggle('open', shouldOpen);
       button.setAttribute('aria-expanded', String(shouldOpen));
-      button.innerHTML = shouldOpen ? '📕 Tutup panduan SI' : '📘 Lihat panduan SI';
+      button.innerHTML = shouldOpen ? '📕 Close SI guidance' : '📘 View SI guidance';
     };
     button.addEventListener('click', () => toggle());
 
     const result = row.querySelector('.result');
-    if (result) {
-      result.addEventListener('change', () => {
-        if (result.value === 'Tidak Sesuai') toggle(true);
-      });
-    }
+    if (result) result.addEventListener('change', () => { if (result.value === 'Tidak Sesuai') toggle(true); });
   });
 }
 
