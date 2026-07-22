@@ -23,12 +23,74 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Prepare website with institutional logos
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64
+
+          site = Path('_site')
+          site.mkdir(exist_ok=True)
+
+          (site / 'logo-kemenhub.jpg').write_bytes(
+              base64.b64decode(Path('assets/logo-kemenhub.b64').read_text().strip())
+          )
+          (site / 'logo-otban-x.jpg').write_bytes(
+              base64.b64decode(Path('assets/logo-otban-x.b64').read_text().strip())
+          )
+
+          html = Path('index.html').read_text(encoding='utf-8')
+
+          css = r'''
+          .brand-header{display:flex;align-items:center;gap:14px}
+          .header-logo-group,.nav-logo-group{display:flex;align-items:center;flex-shrink:0}
+          .header-logo-group img{width:54px;height:54px;object-fit:contain;border-radius:50%;padding:4px;background:#fff;border:2px solid rgba(255,255,255,.75);box-shadow:0 5px 14px rgba(0,0,0,.18)}
+          .header-logo-group img:last-child{margin-left:-15px;padding:2px;background:#071826}
+          .header-copy h1{margin:0;font-size:22px}.header-copy small{display:block;margin-top:3px}
+          .nav-institution{display:flex;align-items:center;gap:10px;margin:3px 5px 12px;padding:10px;border-radius:12px;background:linear-gradient(135deg,#eef5ff,#fff);border:1px solid #d7e1ee}
+          .nav-logo-group{width:64px}
+          .nav-logo-group img{width:38px;height:38px;object-fit:contain;border-radius:50%;padding:3px;background:#fff;border:1px solid #d7e1ee;box-shadow:0 3px 9px rgba(18,46,88,.12)}
+          .nav-logo-group img:last-child{margin-left:-12px;padding:1px;background:#071826}
+          .nav-institution strong{display:block;font-size:12px;color:#092b62}.nav-institution span{display:block;font-size:10px;color:#68758a;margin-top:2px}
+          @media(max-width:800px){.brand-header{align-items:flex-start}.header-logo-group img{width:44px;height:44px}.header-copy h1{font-size:19px}.nav-institution{grid-column:1/-1}}
+          '''
+          html = html.replace('</head>', f'<style>{css}</style></head>')
+
+          old_header = '<header><h1>E-RAMP OTBAN X</h1><small>Digital Ramp Inspection Checklist • Kantor Otoritas Bandar Udara Wilayah X Merauke</small></header>'
+          new_header = '''<header class="brand-header">
+          <div class="header-logo-group" aria-label="Logo instansi">
+            <img src="logo-kemenhub.jpg" alt="Logo Kementerian Perhubungan">
+            <img src="logo-otban-x.jpg" alt="Logo Otoritas Bandar Udara Wilayah X Merauke">
+          </div>
+          <div class="header-copy"><h1>E-RAMP OTBAN X</h1><small>Digital Ramp Inspection Checklist • Kantor Otoritas Bandar Udara Wilayah X Merauke</small></div>
+          </header>'''
+          if old_header not in html:
+              raise SystemExit('Header website tidak ditemukan; deployment dihentikan agar file tidak rusak.')
+          html = html.replace(old_header, new_header, 1)
+
+          old_nav = '<nav>\n<div id="userbar" class="userbar">Belum login</div>'
+          new_nav = '''<nav>
+          <div class="nav-institution">
+            <div class="nav-logo-group"><img src="logo-kemenhub.jpg" alt="Kemenhub"><img src="logo-otban-x.jpg" alt="Otban X"></div>
+            <div><strong>OTBAN WILAYAH X</strong><span>Merauke</span></div>
+          </div>
+          <div id="userbar" class="userbar">Belum login</div>'''
+          if old_nav not in html:
+              raise SystemExit('Navigasi website tidak ditemukan; deployment dihentikan agar file tidak rusak.')
+          html = html.replace(old_nav, new_nav, 1)
+
+          (site / 'index.html').write_text(html, encoding='utf-8')
+          PY
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "."
+          path: "_site"
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
