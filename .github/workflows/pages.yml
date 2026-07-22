@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare website with institutional logos, SI guidance, and auth redirect fix
+      - name: Prepare website with institutional logos, English SI guidance, formal record, and auth redirect fix
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -44,8 +44,10 @@ jobs:
               'si-guide-a.js',
               'si-guide-b.js',
               'si-guide-cde.js',
+              'si-guide-en.js',
               'si-guide-ui.js',
               'auth-redirect-fix.js',
+              'formal-ramp-form.js',
           )
           for filename in website_files:
               source = Path(filename)
@@ -97,8 +99,10 @@ jobs:
           <script src="si-guide-a.js"></script>
           <script src="si-guide-b.js"></script>
           <script src="si-guide-cde.js"></script>
+          <script src="si-guide-en.js"></script>
           <script src="si-guide-ui.js"></script>
           <script src="auth-redirect-fix.js"></script>
+          <script src="formal-ramp-form.js"></script>
           '''
           if '</body>' not in html:
               raise SystemExit('Tag penutup body tidak ditemukan.')
