@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare website with institutional logos and SI guidance
+      - name: Prepare website with institutional logos, SI guidance, and auth redirect fix
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -40,16 +40,17 @@ jobs:
               base64.b64decode(Path('assets/logo-otban-x.b64').read_text().strip())
           )
 
-          guidance_files = (
+          website_files = (
               'si-guide-a.js',
               'si-guide-b.js',
               'si-guide-cde.js',
               'si-guide-ui.js',
+              'auth-redirect-fix.js',
           )
-          for filename in guidance_files:
+          for filename in website_files:
               source = Path(filename)
               if not source.exists():
-                  raise SystemExit(f'File panduan tidak ditemukan: {filename}')
+                  raise SystemExit(f'File website tidak ditemukan: {filename}')
               (site / filename).write_text(source.read_text(encoding='utf-8'), encoding='utf-8')
 
           html = Path('index.html').read_text(encoding='utf-8')
@@ -97,6 +98,7 @@ jobs:
           <script src="si-guide-b.js"></script>
           <script src="si-guide-cde.js"></script>
           <script src="si-guide-ui.js"></script>
+          <script src="auth-redirect-fix.js"></script>
           '''
           if '</body>' not in html:
               raise SystemExit('Tag penutup body tidak ditemukan.')
