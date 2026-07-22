@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare website with institutional logos
+      - name: Prepare website with institutional logos and SI guidance
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -39,6 +39,18 @@ jobs:
           (site / 'logo-otban-x.jpg').write_bytes(
               base64.b64decode(Path('assets/logo-otban-x.b64').read_text().strip())
           )
+
+          guidance_files = (
+              'si-guide-a.js',
+              'si-guide-b.js',
+              'si-guide-cde.js',
+              'si-guide-ui.js',
+          )
+          for filename in guidance_files:
+              source = Path(filename)
+              if not source.exists():
+                  raise SystemExit(f'File panduan tidak ditemukan: {filename}')
+              (site / filename).write_text(source.read_text(encoding='utf-8'), encoding='utf-8')
 
           html = Path('index.html').read_text(encoding='utf-8')
 
@@ -79,6 +91,16 @@ jobs:
           if old_nav not in html:
               raise SystemExit('Navigasi website tidak ditemukan; deployment dihentikan agar file tidak rusak.')
           html = html.replace(old_nav, new_nav, 1)
+
+          scripts = '''
+          <script src="si-guide-a.js"></script>
+          <script src="si-guide-b.js"></script>
+          <script src="si-guide-cde.js"></script>
+          <script src="si-guide-ui.js"></script>
+          '''
+          if '</body>' not in html:
+              raise SystemExit('Tag penutup body tidak ditemukan.')
+          html = html.replace('</body>', scripts + '</body>', 1)
 
           (site / 'index.html').write_text(html, encoding='utf-8')
           PY
