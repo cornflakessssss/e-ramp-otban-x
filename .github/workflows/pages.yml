@@ -33,9 +33,6 @@ jobs:
           site = Path('_site')
           site.mkdir(exist_ok=True)
 
-          (site / 'logo-kemenhub.jpg').write_bytes(
-              base64.b64decode(Path('assets/logo-kemenhub.b64').read_text().strip())
-          )
           (site / 'logo-otban-x.jpg').write_bytes(
               base64.b64decode(Path('assets/logo-otban-x.b64').read_text().strip())
           )
@@ -57,26 +54,50 @@ jobs:
 
           html = Path('index.html').read_text(encoding='utf-8')
 
+          kemenhub_svg = '''<span class="kemenhub-logo" role="img" aria-label="Logo Kementerian Perhubungan">
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="150" cy="146" r="103" fill="#2f3096"/>
+            <g fill="none" stroke="#ffd21c" stroke-width="7" stroke-linecap="round">
+              <path d="M50 146h200"/>
+              <path d="M150 43v206"/>
+              <path d="M78 83c42 24 102 24 144 0"/>
+              <path d="M78 209c42-24 102-24 144 0"/>
+              <path d="M104 53c-27 49-27 137 0 186"/>
+              <path d="M196 53c27 49 27 137 0 186"/>
+            </g>
+            <path d="M45 174c40 2 76-9 111-32 18-12 35-29 52-49-3 25 3 40 20 48-21 3-39 11-54 25-24 23-41 57-51 101-11-48-27-76-49-84-10-4-20-7-29-9z" fill="#ffd21c"/>
+            <path d="M154 142c19-4 37-15 52-33-1 12 3 21 13 27-17-1-30 3-39 11-8 7-14 17-18 31-3-15-8-25-16-31-7-5-16-7-27-6 12-4 24-4 35 1z" fill="#2f3096"/>
+            <path d="M202 117c13-5 24-4 33 4-8 1-15 3-21 7-5 3-9 8-12 14 1-10 1-18 0-25z" fill="#ffd21c"/>
+            <g fill="#ffd21c">
+              <rect x="239" y="150" width="22" height="12" rx="2" transform="rotate(5 250 156)"/>
+              <rect x="235" y="177" width="22" height="12" rx="2" transform="rotate(20 246 183)"/>
+              <rect x="224" y="202" width="22" height="12" rx="2" transform="rotate(35 235 208)"/>
+              <rect x="207" y="223" width="22" height="12" rx="2" transform="rotate(50 218 229)"/>
+              <rect x="185" y="239" width="22" height="12" rx="2" transform="rotate(65 196 245)"/>
+            </g>
+          </svg></span>'''
+
           css = r'''
           .brand-header{display:flex;align-items:center;gap:16px}
           .header-logo-group,.nav-logo-group{display:flex;align-items:center;gap:8px;flex-shrink:0}
-          .header-logo-group img{display:block;width:64px;height:64px;object-fit:contain;border-radius:14px;padding:5px;background:#fff;border:2px solid rgba(255,255,255,.9);box-shadow:0 5px 14px rgba(0,0,0,.2)}
-          .header-logo-group img:last-child{width:60px;height:60px;padding:3px;background:#071826}
+          .kemenhub-logo{display:block;width:64px;height:64px;border-radius:14px;padding:3px;background:#fff;border:2px solid rgba(255,255,255,.9);box-shadow:0 5px 14px rgba(0,0,0,.2);overflow:hidden}
+          .kemenhub-logo svg{display:block;width:100%;height:100%}
+          .header-logo-group img{display:block;width:60px;height:60px;object-fit:contain;border-radius:14px;padding:3px;background:#071826;border:2px solid rgba(255,255,255,.9);box-shadow:0 5px 14px rgba(0,0,0,.2)}
           .header-copy h1{margin:0;font-size:22px}.header-copy small{display:block;margin-top:3px}
           .nav-institution{display:flex;align-items:center;gap:10px;margin:3px 5px 12px;padding:10px;border-radius:12px;background:linear-gradient(135deg,#eef5ff,#fff);border:1px solid #d7e1ee}
           .nav-logo-group{width:auto}
-          .nav-logo-group img{display:block;width:46px;height:46px;object-fit:contain;border-radius:10px;padding:3px;background:#fff;border:1px solid #d7e1ee;box-shadow:0 3px 9px rgba(18,46,88,.12)}
-          .nav-logo-group img:last-child{width:43px;height:43px;padding:2px;background:#071826}
+          .nav-logo-group .kemenhub-logo{width:46px;height:46px;border-radius:10px;padding:2px;border:1px solid #d7e1ee;box-shadow:0 3px 9px rgba(18,46,88,.12)}
+          .nav-logo-group img{display:block;width:43px;height:43px;object-fit:contain;border-radius:10px;padding:2px;background:#071826;border:1px solid #d7e1ee;box-shadow:0 3px 9px rgba(18,46,88,.12)}
           .nav-institution strong{display:block;font-size:12px;color:#092b62}.nav-institution span{display:block;font-size:10px;color:#68758a;margin-top:2px}
-          @media(max-width:800px){.brand-header{align-items:flex-start}.header-logo-group img{width:52px;height:52px}.header-logo-group img:last-child{width:49px;height:49px}.header-copy h1{font-size:19px}.nav-institution{grid-column:1/-1}}
+          @media(max-width:800px){.brand-header{align-items:flex-start}.header-logo-group .kemenhub-logo{width:52px;height:52px}.header-logo-group img{width:49px;height:49px}.header-copy h1{font-size:19px}.nav-institution{grid-column:1/-1}}
           '''
           html = html.replace('</head>', f'<style>{css}</style></head>')
 
           old_header = '<header><h1>E-RAMP OTBAN X</h1><small>Digital Ramp Inspection Checklist • Kantor Otoritas Bandar Udara Wilayah X Merauke</small></header>'
-          new_header = '''<header class="brand-header">
+          new_header = f'''<header class="brand-header">
           <div class="header-logo-group" aria-label="Logo instansi">
-            <img src="logo-kemenhub.jpg?v=3" alt="Logo Kementerian Perhubungan">
-            <img src="logo-otban-x.jpg?v=3" alt="Logo Otoritas Bandar Udara Wilayah X Merauke">
+            {kemenhub_svg}
+            <img src="logo-otban-x.jpg?v=4" alt="Logo Otoritas Bandar Udara Wilayah X Merauke">
           </div>
           <div class="header-copy"><h1>E-RAMP OTBAN X</h1><small>Digital Ramp Inspection Checklist • Kantor Otoritas Bandar Udara Wilayah X Merauke</small></div>
           </header>'''
@@ -85,9 +106,9 @@ jobs:
           html = html.replace(old_header, new_header, 1)
 
           old_nav = '<nav>\n<div id="userbar" class="userbar">Belum login</div>'
-          new_nav = '''<nav>
+          new_nav = f'''<nav>
           <div class="nav-institution">
-            <div class="nav-logo-group"><img src="logo-kemenhub.jpg?v=3" alt="Kemenhub"><img src="logo-otban-x.jpg?v=3" alt="Otban X"></div>
+            <div class="nav-logo-group">{kemenhub_svg}<img src="logo-otban-x.jpg?v=4" alt="Otban X"></div>
             <div><strong>OTBAN WILAYAH X</strong><span>Merauke</span></div>
           </div>
           <div id="userbar" class="userbar">Belum login</div>'''
