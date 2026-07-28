@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Mode pembelajaran publik E-RAMP OTBAN X. Checklist dan panduan SI 8900-6.2 dalam tampilan baca-saja tanpa login.">
+<title>Mode Pembelajaran E-RAMP OTBAN X</title>
+<style>
+:root{--navy:#092b62;--blue:#155fbd;--blue2:#eaf3ff;--yellow:#ffc61a;--ink:#17233a;--muted:#617089;--line:#d7e1ef;--bg:#f5f8fc;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+a{color:inherit}button,input{font:inherit}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1180px;margin:auto;padding:10px 20px;display:flex;align-items:center;gap:14px}
+.logos{display:flex;align-items:center;min-width:94px}.logos img{width:52px;height:52px;object-fit:contain;border-radius:50%;background:white;padding:3px;border:1px solid var(--line)}.logos img+img{margin-left:-10px;background:#092b62}
+.brand strong{display:block;color:var(--navy);font-size:16px}.brand span{display:block;color:var(--muted);font-size:12px}
+.top-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-weight:750;cursor:pointer;background:white;color:var(--navy)}.btn.primary{background:var(--navy);color:white;border-color:var(--navy)}
+.hero{background:linear-gradient(135deg,#061f48,#0b428c 58%,#176bc5);color:white}.hero-inner{max-width:1180px;margin:auto;padding:58px 20px 52px;display:grid;grid-template-columns:1.4fr .6fr;gap:35px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:7px 11px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.04em}.hero h1{font-size:clamp(28px,4.7vw,50px);line-height:1.12;margin:17px 0 13px;max-width:900px}.hero p{font-size:16px;max-width:830px;color:#e8f2ff}.hero-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:22px}.hero-card b{display:block;font-size:32px}.hero-card span{font-size:13px;color:#eaf4ff}
+.container{max-width:1180px;margin:auto;padding:28px 20px 60px}.notice{padding:17px 19px;border-radius:14px;background:#fff8dc;border:1px solid #eed471;margin-bottom:24px}.notice strong{color:#714e00}
+.section-title{margin:34px 0 14px}.section-title h2{margin:0;color:var(--navy);font-size:25px}.section-title p{margin:4px 0 0;color:var(--muted)}
+.grid{display:grid;gap:14px}.berakhlak{grid-template-columns:repeat(4,1fr)}.card{background:white;border:1px solid var(--line);border-radius:15px;padding:17px;box-shadow:0 7px 22px rgba(16,42,82,.05)}.card h3{margin:0 0 7px;color:var(--navy);font-size:16px}.card p{margin:0;color:var(--muted);font-size:13px}
+.categories{grid-template-columns:repeat(4,1fr)}.cat{border-top:4px solid var(--blue)}.cat b{font-size:22px;color:var(--navy)}
+.controls{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin:15px 0}.search{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:white}.filters{display:flex;gap:6px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:white;color:var(--navy);border-radius:999px;padding:8px 11px;font-weight:750;cursor:pointer}.filter.active{background:var(--navy);color:white;border-color:var(--navy)}
+.count{font-size:13px;color:var(--muted);margin:0 0 10px}.checklist{display:grid;gap:10px}.item{background:white;border:1px solid var(--line);border-radius:13px;overflow:hidden}.item summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:58px 1fr auto;gap:11px;align-items:center;padding:14px 15px}.item summary::-webkit-details-marker{display:none}.code{display:flex;align-items:center;justify-content:center;min-height:38px;border-radius:10px;background:var(--blue2);color:var(--navy);font-weight:900}.item-title{font-weight:800}.section-name{color:var(--muted);font-size:12px}.chev{font-weight:900;color:var(--blue)}.item[open] .chev{transform:rotate(180deg)}.details{border-top:1px solid var(--line);padding:15px;background:#fbfdff;display:grid;grid-template-columns:1.2fr .8fr;gap:12px}.detail-block{background:white;border:1px solid #e2e9f3;border-radius:11px;padding:12px}.detail-block.full{grid-column:1/-1}.detail-block b{display:block;color:var(--navy);margin-bottom:5px}.detail-block p{margin:0;color:#43516a;font-size:13px}.severity-list{margin:0;padding-left:18px;font-size:13px}.severity-list li{margin:5px 0}
+.actions{grid-template-columns:repeat(3,1fr)}.action-code{display:inline-flex;min-width:42px;justify-content:center;border-radius:8px;background:var(--blue2);color:var(--navy);font-weight:900;margin-right:6px;padding:3px 7px}
+.footer{background:#061d42;color:#d9e9ff}.footer-inner{max-width:1180px;margin:auto;padding:26px 20px}.footer strong{color:white}.footer p{margin:5px 0 0;font-size:12px}
+.empty{padding:35px;text-align:center;color:var(--muted);background:white;border:1px dashed var(--line);border-radius:14px}
+@media(max-width:850px){.hero-inner{grid-template-columns:1fr}.berakhlak,.categories{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:1fr 1fr}.controls{grid-template-columns:1fr}.details{grid-template-columns:1fr}}
+@media(max-width:560px){.topbar-inner{align-items:flex-start}.logos img{width:42px;height:42px}.brand span{display:none}.top-actions{flex-direction:column}.btn{padding:7px 9px;font-size:12px}.hero-inner{padding-top:40px}.berakhlak,.categories,.actions{grid-template-columns:1fr}.item summary{grid-template-columns:52px 1fr 20px}}
+@media print{.topbar,.controls,.top-actions,.btn-print{display:none!important}body{background:white}.hero{background:white;color:#111;border-bottom:2px solid #111}.hero p,.hero-card span{color:#333}.hero-card{border-color:#999}.item{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="logos">
+      <img src="logo-kemenhub-final.png" alt="Logo Kementerian Perhubungan" onerror="this.style.display='none'">
+      <img src="logo-otban-x.jpg" alt="Logo Otoritas Bandar Udara Wilayah X Merauke" onerror="this.style.display='none'">
+    </div>
+    <div class="brand"><strong>E-RAMP OTBAN X</strong><span>Public Learning Mode • Read Only</span></div>
+    <div class="top-actions">
+      <button class="btn btn-print" type="button" onclick="window.print()">Cetak panduan</button>
+      <a class="btn primary" href="index.html">Login Inspector</a>
+    </div>
+  </div>
+</header>
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="badge">👁 MODE PEMBELAJARAN PUBLIK • TANPA LOGIN</span>
+      <h1>Mode Pembelajaran E-Checklist Ramp Inspection</h1>
+      <p>Bahan pembelajaran dan pedoman praktis ramp inspection dalam tampilan baca-saja untuk mendukung pemahaman checklist dan ketertelusuran pencatatan.</p>
+    </div>
+    <div class="hero-card"><b>58</b><span>item pembelajaran SI 8900-6.2 pada bagian A–E, disajikan dalam tampilan baca-saja.</span></div>
+  </div>
+</section>
+<main class="container">
+  <div class="notice"><strong>Mode ini tidak dapat mengubah data.</strong> Pengunjung tidak perlu mempunyai akun inspector. Halaman ini tidak membaca tabel pemeriksaan, tidak menampilkan data operator, tidak mengunggah foto, dan tidak menyimpan apa pun ke Supabase.</div>
+
+  <div class="section-title"><h2>Tujuan mode pembelajaran</h2><p>Membuka akses pengetahuan tanpa membuka akses operasional.</p></div>
+  <div class="grid berakhlak">
+    <article class="card"><h3>Berorientasi Pelayanan</h3><p>Materi dapat dipelajari secara mudah melalui perangkat pribadi tanpa harus meminta akses inspector.</p></article>
+    <article class="card"><h3>Akuntabel</h3><p>Data pemeriksaan nyata tetap terlindungi; pengunjung hanya melihat panduan dan struktur checklist.</p></article>
+    <article class="card"><h3>Kompeten</h3><p>Setiap item menyediakan inspection method, principal reference, dan examples of seriousness.</p></article>
+    <article class="card"><h3>Harmonis</h3><p>Pengetahuan dapat dibagikan kepada pegawai baru, stakeholder, dan masyarakat pembelajar secara tertib.</p></article>
+    <article class="card"><h3>Loyal</h3><p>Penggunaan tetap menempatkan ketentuan resmi, kewenangan inspector, dan IMSIS sebagai rujukan operasional.</p></article>
+    <article class="card"><h3>Adaptif</h3><p>Pembelajaran konvensional diperkuat melalui pencarian, filter, dan tampilan responsif.</p></article>
+    <article class="card"><h3>Kolaboratif</h3><p>Materi dapat digunakan saat diskusi, briefing, coaching, dan berbagi pengetahuan antarunit.</p></article>
+    <article class="card"><h3>Ketertelusuran</h3><p>Kode item, bagian, referensi, kategori, dan tindakan ditampilkan secara terstruktur.</p></article>
+  </div>
+
+  <div class="section-title" id="categories"><h2>Kategori temuan</h2><p>Ringkasan pembelajaran berdasarkan SI 8900-6.2.</p></div>
+  <div class="grid categories">
+    <article class="card cat"><b>G</b><h3>General Remark</h3><p>Safety-relevant issue that does not constitute a finding.</p></article>
+    <article class="card cat"><b>1</b><h3>Minor</h3><p>Minor influence on safety.</p></article>
+    <article class="card cat"><b>2</b><h3>Significant</h3><p>May have a significant influence on safety.</p></article>
+    <article class="card cat"><b>3</b><h3>Major</h3><p>May have a major influence on safety.</p></article>
+  </div>
+
+  <div class="section-title"><h2>Action Taken</h2><p>Hanya ditampilkan sebagai materi; tidak dapat dipilih atau disimpan pada halaman publik.</p></div>
+  <div class="grid actions">
+    <article class="card"><span class="action-code">0</span>No remarks</article>
+    <article class="card"><span class="action-code">1</span>Information to the PIC</article>
+    <article class="card"><span class="action-code">2</span>Information to the operator and authority</article>
+    <article class="card"><span class="action-code">3a</span>Restrictions on the aircraft</article>
+    <article class="card"><span class="action-code">3b</span>Corrective actions before flight</article>
+    <article class="card"><span class="action-code">3c</span>Aircraft grounded by DGCA inspector</article>
+  </div>
+
+  <div class="section-title" id="checklist"><h2>Checklist pembelajaran A–E</h2><p>Keterangan SI di dalam detail item tetap menggunakan bahasa Inggris.</p></div>
+  <div class="controls">
+    <input id="search" class="search" type="search" placeholder="Cari kode atau nama item, misalnya A20, fire extinguisher, dangerous goods…" autocomplete="off">
+    <div class="filters" id="filters"></div>
+  </div>
+  <p id="count" class="count"></p>
+  <div id="checklistList" class="checklist" aria-live="polite"></div>
+
+  <div class="section-title"><h2>Batas penggunaan</h2></div>
+  <div class="notice"><strong>Bahan pembelajaran, bukan kewenangan pemeriksaan.</strong> Halaman ini tidak menggantikan SI 8900-6.2 lengkap, CASR, ICAO Annexes, approved manufacturer data, prosedur organisasi, formulir resmi, atau pencatatan pada IMSIS. Penetapan finding, category, dan action tetap menjadi kewenangan inspector yang ditugaskan.</div>
+</main>
+<footer class="footer"><div class="footer-inner"><strong>E-RAMP OTBAN X • Mode Pembelajaran Publik</strong><p>Kantor Otoritas Bandar Udara Wilayah X Merauke — tampilan baca-saja tanpa akses ke data pemeriksaan.</p></div></footer>
+<script src="si-guide-en.js?v=public-learning-1"></script>
+<script>
+const FALLBACK_ITEMS=[{"code": "A1", "title": "General condition", "section": "A"}, {"code": "A2", "title": "Emergency exit", "section": "A"}, {"code": "A3", "title": "Equipment", "section": "A"}, {"code": "A4", "title": "Manuals", "section": "A"}, {"code": "A5", "title": "Checklists", "section": "A"}, {"code": "A6", "title": "Navigation and instrument charts", "section": "A"}, {"code": "A7", "title": "Minimum Equipment List", "section": "A"}, {"code": "A8", "title": "Certificate of Registration", "section": "A"}, {"code": "A9", "title": "Noise Certificate", "section": "A"}, {"code": "A10", "title": "AOC and Operations Specifications", "section": "A"}, {"code": "A11", "title": "Radio station licence", "section": "A"}, {"code": "A12", "title": "Certificate of Airworthiness", "section": "A"}, {"code": "A13", "title": "Flight preparation", "section": "A"}, {"code": "A14", "title": "Mass and balance documentation", "section": "A"}, {"code": "A15", "title": "Hand fire extinguishers", "section": "A"}, {"code": "A16", "title": "Life jackets or flotation devices", "section": "A"}, {"code": "A17", "title": "Safety harness", "section": "A"}, {"code": "A18", "title": "Oxygen equipment", "section": "A"}, {"code": "A19", "title": "Flashlight and crash axe", "section": "A"}, {"code": "A20", "title": "Flight crew licences", "section": "A"}, {"code": "A21", "title": "Journey or Technical Log", "section": "A"}, {"code": "A22", "title": "Maintenance release", "section": "A"}, {"code": "A23", "title": "Defect notification and rectification", "section": "A"}, {"code": "A24", "title": "Pre-flight inspection", "section": "A"}, {"code": "A25", "title": "ETOPS or EDTO requirements", "section": "A"}, {"code": "B1", "title": "General internal condition and placards", "section": "B"}, {"code": "B2", "title": "Cabin attendant stations and crew rest", "section": "B"}, {"code": "B3", "title": "First-aid and emergency medical kits", "section": "B"}, {"code": "B4", "title": "Fire extinguishers and protective breathing equipment", "section": "B"}, {"code": "B5", "title": "Life jackets or flotation devices", "section": "B"}, {"code": "B6", "title": "Seat belts and seat condition", "section": "B"}, {"code": "B7", "title": "Emergency exits, lighting, marking, flashlights and megaphones", "section": "B"}, {"code": "B8", "title": "Slides, life rafts and ELT", "section": "B"}, {"code": "B9", "title": "Oxygen supply for cabin crew and passengers", "section": "B"}, {"code": "B10", "title": "Safety instructions and briefing cards", "section": "B"}, {"code": "B11", "title": "Cabin crew members", "section": "B"}, {"code": "B12", "title": "Access to emergency exits", "section": "B"}, {"code": "B13", "title": "Stowage of cabin baggage", "section": "B"}, {"code": "B14", "title": "Seating capacity", "section": "B"}, {"code": "B15", "title": "Flight crew compartment door security", "section": "B"}, {"code": "C1", "title": "General external condition", "section": "C"}, {"code": "C2", "title": "Doors and hatches", "section": "C"}, {"code": "C3", "title": "Wings, flight controls and tail", "section": "C"}, {"code": "C4", "title": "Wheels, brakes and tyres", "section": "C"}, {"code": "C5", "title": "Undercarriage, skids or floats", "section": "C"}, {"code": "C6", "title": "Wheel well", "section": "C"}, {"code": "C7", "title": "Intake and exhaust nozzle", "section": "C"}, {"code": "C8", "title": "Fan blades", "section": "C"}, {"code": "C9", "title": "Propellers or rotors", "section": "C"}, {"code": "C10", "title": "Obvious repairs", "section": "C"}, {"code": "C11", "title": "Obvious unrepaired damage", "section": "C"}, {"code": "C12", "title": "Leakage", "section": "C"}, {"code": "D1", "title": "Cargo compartment and containers", "section": "D"}, {"code": "D2", "title": "Dangerous goods", "section": "D"}, {"code": "D3", "title": "Safety of cargo on board", "section": "D"}, {"code": "E1", "title": "Additional remarks", "section": "E"}, {"code": "E2", "title": "Refuelling", "section": "E"}, {"code": "E3", "title": "Language for communication", "section": "E"}];
+const SECTIONS={"A": "Flight Deck", "B": "Safety / Cabin Items", "C": "Aircraft External Condition", "D": "Cargo and Cargo Compartment", "E": "General"};
+let activeSection='ALL';
+const guidance=window.SI_GUIDANCE||{};
+const filters=document.getElementById('filters');
+const list=document.getElementById('checklistList');
+const search=document.getElementById('search');
+const count=document.getElementById('count');
+
+function escapeHtml(value=''){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function severityHtml(data){
+  if(!data||!Object.keys(data).length)return '<p>See the complete SI 8900-6.2 and applicable references.</p>';
+  return '<ul class="severity-list">'+['Minor','Significant','Major'].filter(k=>data[k]).map(k=>`<li><b>${k}:</b> ${escapeHtml(data[k])}</li>`).join('')+'</ul>';
+}
+function makeFilters(){
+  const values=[['ALL','Semua'],...Object.entries(SECTIONS).map(([k,v])=>[k,`${k} — ${v}`])];
+  filters.innerHTML=values.map(([key,label])=>`<button class="filter ${key==='ALL'?'active':''}" data-section="${key}" type="button">${escapeHtml(label)}</button>`).join('');
+  filters.addEventListener('click',e=>{const b=e.target.closest('.filter');if(!b)return;activeSection=b.dataset.section;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));render();});
+}
+function render(){
+  const q=search.value.trim().toLowerCase();
+  const rows=FALLBACK_ITEMS.filter(item=>{
+    const guide=guidance[item.code]||{};
+    const hay=[item.code,item.title,SECTIONS[item.section],guide.title,guide.instruction,guide.reference].filter(Boolean).join(' ').toLowerCase();
+    return (activeSection==='ALL'||item.section===activeSection)&&(!q||hay.includes(q));
+  });
+  count.textContent=`Menampilkan ${rows.length} dari ${FALLBACK_ITEMS.length} item • Read only`;
+  if(!rows.length){list.innerHTML='<div class="empty">Tidak ada item yang cocok dengan pencarian.</div>';return;}
+  list.innerHTML=rows.map(item=>{
+    const g=guidance[item.code]||{};
+    const title=g.title||item.title;
+    return `<details class="item">
+      <summary><span class="code">${item.code}</span><span><span class="item-title">${escapeHtml(title)}</span><span class="section-name">${escapeHtml(SECTIONS[item.section])}</span></span><span class="chev">⌄</span></summary>
+      <div class="details">
+        <div class="detail-block"><b>Inspection method</b><p>${escapeHtml(g.instruction||'Study the inspection scope, applicable documents and the complete SI 8900-6.2 before operational use.')}</p></div>
+        <div class="detail-block"><b>Principal reference</b><p>${escapeHtml(g.reference||'SI 8900-6.2 Appendix 2 and applicable official references.')}</p></div>
+        <div class="detail-block full"><b>Examples of seriousness</b>${severityHtml(g.severity)}</div>
+      </div>
+    </details>`;
+  }).join('');
+}
+makeFilters();search.addEventListener('input',render);render();
+</script>
+</body>
+</html>
