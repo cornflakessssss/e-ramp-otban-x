@@ -54,6 +54,9 @@ jobs:
               'si-guide-ui.js',
               'auth-redirect-fix.js',
               'formal-ramp-form.js',
+              'learning.html',
+              'login-notifications.js',
+              
           )
           for filename in website_files:
               source = Path(filename)
@@ -110,6 +113,7 @@ jobs:
           <script src="si-guide-ui.js"></script>
           <script src="auth-redirect-fix.js"></script>
           <script src="formal-ramp-form.js"></script>
+          <script src="login-notifications.js?v=1"></script>
           '''
           if '</body>' not in html:
               raise SystemExit('Tag penutup body tidak ditemukan.')
